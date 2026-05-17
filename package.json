@@ -1,0 +1,29 @@
+{
+  "name": "korean-vocab-trainer",
+  "version": "0.1.0",
+  "description": "韩语入门词表闪卡应用，支持课程练习、单词本复习、登录同步和字幕瀑布背景。",
+  "private": true,
+  "license": "MIT",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "test": "vitest run",
+    "import:vocab": "node scripts/import-vocabulary.mjs"
+  },
+  "dependencies": {
+    "lucide-react": "latest",
+    "next": "latest",
+    "postgres": "latest",
+    "react": "latest",
+    "react-dom": "latest"
+  },
+  "devDependencies": {
+    "@types/node": "latest",
+    "@types/react": "latest",
+    "@types/react-dom": "latest",
+    "typescript": "latest",
+    "vitest": "latest",
+    "xlsx": "latest"
+  }
+}
