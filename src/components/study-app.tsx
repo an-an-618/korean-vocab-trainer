@@ -26,6 +26,7 @@ import {
 import { gradeAnswer, getExpectedAnswer, getPrompt } from "@/lib/grading";
 import { lessons, vocabulary } from "@/lib/vocabulary";
 import type {
+  CustomSentence,
   ProgressPayload,
   StudyDirection,
   StudyMode,
@@ -79,6 +80,12 @@ export function StudyApp() {
   const [sessionLoaded, setSessionLoaded] = useState(false);
   const [wordbook, setWordbook] = useState<WordbookItem[]>([]);
   const [stats, setStats] = useState<StudyStat[]>([]);
+  const [customSentences, setCustomSentences] = useState<CustomSentence[]>([]);
+  const [customSentenceForm, setCustomSentenceForm] = useState({
+    korean: "",
+    chinese: "",
+  });
+  const [customSentenceMessage, setCustomSentenceMessage] = useState("");
   const [queue, setQueue] = useState<VocabularyEntry[]>([]);
   const [answeredCount, setAnsweredCount] = useState(0);
   const [sessionTotal, setSessionTotal] = useState(0);
@@ -135,6 +142,19 @@ export function StudyApp() {
     () => getKeySentencesByLesson(selectedSentenceLesson),
     [selectedSentenceLesson],
   );
+  const selectedCustomSentences = useMemo(
+    () => customSentences.filter((sentence) => sentence.lesson === selectedSentenceLesson),
+    [customSentences, selectedSentenceLesson],
+  );
+  const sentenceLessonCounts = useMemo(() => {
+    return new Map(
+      keySentenceLessons.map((lesson) => [
+        lesson,
+        getKeySentencesByLesson(lesson).length +
+          customSentences.filter((sentence) => sentence.lesson === lesson).length,
+      ]),
+    );
+  }, [customSentences]);
 
   useEffect(() => {
     async function loadSession() {
@@ -164,6 +184,26 @@ export function StudyApp() {
     }
 
     void loadProgress();
+  }, [session]);
+
+  useEffect(() => {
+    async function loadCustomSentences() {
+      if (!session) {
+        setCustomSentences([]);
+        return;
+      }
+
+      try {
+        const response = await fetch("/api/sentences");
+        if (!response.ok) throw new Error("无法加载我的例句");
+        const data = (await response.json()) as { sentences: CustomSentence[] };
+        setCustomSentences(data.sentences);
+      } catch (error) {
+        setCustomSentenceMessage(getErrorMessage(error));
+      }
+    }
+
+    void loadCustomSentences();
   }, [session]);
 
   useEffect(() => {
@@ -281,7 +321,65 @@ export function StudyApp() {
     setSession(null);
     setWordbook([]);
     setStats([]);
+    setCustomSentences([]);
+    setCustomSentenceMessage("");
     setSyncMessage("已退出登录");
+  }
+
+  async function addCustomSentence(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    if (!session) {
+      setCustomSentenceMessage("登录后才能保存自己的例句");
+      return;
+    }
+
+    const korean = customSentenceForm.korean.trim();
+    const chinese = customSentenceForm.chinese.trim();
+    if (!korean || !chinese) {
+      setCustomSentenceMessage("请同时填写韩文句子和中文意思");
+      return;
+    }
+
+    try {
+      const response = await fetch("/api/sentences", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          lesson: selectedSentenceLesson,
+          korean,
+          chinese,
+        }),
+      });
+      if (!response.ok) throw new Error("保存例句失败");
+      const data = (await response.json()) as { sentence: CustomSentence };
+      setCustomSentences((sentences) => [data.sentence, ...sentences]);
+      setCustomSentenceForm({ korean: "", chinese: "" });
+      setCustomSentenceMessage("已保存到我的例句");
+    } catch (error) {
+      setCustomSentenceMessage(getErrorMessage(error));
+    }
+  }
+
+  async function deleteCustomSentence(sentenceId: string) {
+    if (!session) return;
+
+    const previous = customSentences;
+    setCustomSentences((sentences) =>
+      sentences.filter((sentence) => sentence.id !== sentenceId),
+    );
+
+    try {
+      const response = await fetch("/api/sentences", {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ id: sentenceId }),
+      });
+      if (!response.ok) throw new Error("删除例句失败");
+      setCustomSentenceMessage("已删除自定义例句");
+    } catch (error) {
+      setCustomSentences(previous);
+      setCustomSentenceMessage(getErrorMessage(error));
+    }
   }
 
   function renderProgress() {
@@ -398,11 +496,12 @@ export function StudyApp() {
               <p className="eyebrow">Sentences</p>
               <h2>重点例句</h2>
               <p>
-                来自教材 2-7 课重点句子笔记 · 共 {keySentences.length} 句
+                教材固定例句 {keySentences.length} 句
+                {session ? ` · 我的例句 ${customSentences.length} 句` : " · 登录后可添加我的例句"}
               </p>
             </div>
             <div className="sentences-count">
-              <strong>{selectedSentences.length}</strong>
+              <strong>{selectedSentences.length + selectedCustomSentences.length}</strong>
               <span>{selectedSentenceLesson}</span>
             </div>
           </div>
@@ -416,9 +515,63 @@ export function StudyApp() {
                 type="button"
               >
                 {lesson}
-                <span>{getKeySentencesByLesson(lesson).length}</span>
+                <span>{sentenceLessonCounts.get(lesson) ?? 0}</span>
               </button>
             ))}
+          </div>
+
+          <div className="custom-sentence-card">
+            {session ? (
+              <form className="custom-sentence-form" onSubmit={addCustomSentence}>
+                <div>
+                  <span className="sentence-source-label">我的例句 · {selectedSentenceLesson}</span>
+                  <p>把课堂外想记住的句子补在这里，会跟随当前 Vercel 账号保存。</p>
+                </div>
+                <div className="sentence-form-grid">
+                  <textarea
+                    aria-label="自定义韩文句子"
+                    maxLength={300}
+                    onChange={(event) =>
+                      setCustomSentenceForm((form) => ({
+                        ...form,
+                        korean: event.target.value,
+                      }))
+                    }
+                    placeholder="输入韩文句子"
+                    rows={2}
+                    value={customSentenceForm.korean}
+                  />
+                  <textarea
+                    aria-label="自定义中文意思"
+                    maxLength={300}
+                    onChange={(event) =>
+                      setCustomSentenceForm((form) => ({
+                        ...form,
+                        chinese: event.target.value,
+                      }))
+                    }
+                    placeholder="输入中文意思"
+                    rows={2}
+                    value={customSentenceForm.chinese}
+                  />
+                  <button className="primary-button" type="submit">
+                    保存例句
+                  </button>
+                </div>
+                {customSentenceMessage ? (
+                  <p className="sentence-form-message">{customSentenceMessage}</p>
+                ) : null}
+              </form>
+            ) : (
+              <div className="sentence-login-state">
+                <span className="sentence-source-label">我的例句</span>
+                <p>登录后可以添加、保存并同步自己的韩文例句。</p>
+                <a className="ghost-button" href="/api/auth/authorize">
+                  <LogIn size={16} />
+                  Vercel 登录
+                </a>
+              </div>
+            )}
           </div>
 
           <div className="sentence-list">
@@ -430,6 +583,29 @@ export function StudyApp() {
                   <strong>{sentence.korean}</strong>
                   {sentence.chinese ? <p>{sentence.chinese}</p> : null}
                 </div>
+              </article>
+            ))}
+            {selectedCustomSentences.length ? (
+              <div className="sentence-section-title">我的例句</div>
+            ) : null}
+            {selectedCustomSentences.map((sentence, index) => (
+              <article className="sentence-row custom" key={sentence.id}>
+                <div className="sentence-index">
+                  {String(selectedSentences.length + index + 1).padStart(2, "0")}
+                </div>
+                <div>
+                  <span>自定义</span>
+                  <strong>{sentence.korean}</strong>
+                  <p>{sentence.chinese}</p>
+                </div>
+                <button
+                  aria-label="删除自定义例句"
+                  className="sentence-delete-button"
+                  onClick={() => void deleteCustomSentence(sentence.id)}
+                  type="button"
+                >
+                  <X size={15} />
+                </button>
               </article>
             ))}
           </div>

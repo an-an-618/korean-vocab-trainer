@@ -1,5 +1,5 @@
 import postgres from "postgres";
-import type { ProgressPayload } from "@/lib/types";
+import type { CustomSentence, ProgressPayload } from "@/lib/types";
 
 let sqlClient: ReturnType<typeof postgres> | null = null;
 
@@ -102,5 +102,64 @@ export async function recordStudyResult(userId: string, wordId: string, correct:
       correct_count = study_stats.correct_count + ${correct ? 1 : 0},
       wrong_count = study_stats.wrong_count + ${correct ? 0 : 1},
       last_seen_at = now()
+  `;
+}
+
+export async function getCustomSentences(userId: string): Promise<CustomSentence[]> {
+  const sql = getSql();
+  const rows = await sql<{
+    id: string;
+    lesson: string;
+    korean: string;
+    chinese: string;
+    created_at: Date;
+  }[]>`
+    select id, lesson, korean, chinese, created_at
+    from custom_sentences
+    where user_id = ${userId}
+    order by created_at desc
+  `;
+
+  return rows.map((row) => ({
+    id: row.id,
+    lesson: row.lesson,
+    korean: row.korean,
+    chinese: row.chinese,
+    createdAt: row.created_at.toISOString(),
+  }));
+}
+
+export async function addCustomSentence(
+  userId: string,
+  input: { lesson: string; korean: string; chinese: string },
+): Promise<CustomSentence> {
+  const sql = getSql();
+  const rows = await sql<{
+    id: string;
+    lesson: string;
+    korean: string;
+    chinese: string;
+    created_at: Date;
+  }[]>`
+    insert into custom_sentences (user_id, lesson, korean, chinese)
+    values (${userId}, ${input.lesson}, ${input.korean}, ${input.chinese})
+    returning id, lesson, korean, chinese, created_at
+  `;
+
+  const row = rows[0];
+  return {
+    id: row.id,
+    lesson: row.lesson,
+    korean: row.korean,
+    chinese: row.chinese,
+    createdAt: row.created_at.toISOString(),
+  };
+}
+
+export async function removeCustomSentence(userId: string, sentenceId: string) {
+  const sql = getSql();
+  await sql`
+    delete from custom_sentences
+    where user_id = ${userId} and id = ${sentenceId}
   `;
 }

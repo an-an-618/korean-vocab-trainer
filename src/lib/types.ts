@@ -27,6 +27,14 @@ export type WordbookItem = {
   createdAt: string;
 };
 
+export type CustomSentence = {
+  id: string;
+  lesson: string;
+  korean: string;
+  chinese: string;
+  createdAt: string;
+};
+
 export type ProgressPayload = {
   wordbook: WordbookItem[];
   stats: StudyStat[];

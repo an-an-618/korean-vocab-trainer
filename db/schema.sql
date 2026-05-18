@@ -23,8 +23,20 @@ create table if not exists study_stats (
   primary key (user_id, word_id)
 );
 
+create table if not exists custom_sentences (
+  id uuid primary key default gen_random_uuid(),
+  user_id uuid not null references users(id) on delete cascade,
+  lesson text not null,
+  korean text not null,
+  chinese text not null,
+  created_at timestamptz not null default now()
+);
+
 create index if not exists wordbook_items_user_created_idx
   on wordbook_items (user_id, created_at desc);
 
 create index if not exists study_stats_user_last_seen_idx
   on study_stats (user_id, last_seen_at desc);
+
+create index if not exists custom_sentences_user_lesson_created_idx
+  on custom_sentences (user_id, lesson, created_at desc);
