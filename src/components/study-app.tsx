@@ -18,6 +18,11 @@ import {
 } from "lucide-react";
 import { FormEvent, useEffect, useMemo, useState } from "react";
 import { WordWaterfall } from "@/components/word-waterfall";
+import {
+  getKeySentencesByLesson,
+  keySentenceLessons,
+  keySentences,
+} from "@/data/key-sentences";
 import { gradeAnswer, getExpectedAnswer, getPrompt } from "@/lib/grading";
 import { lessons, vocabulary } from "@/lib/vocabulary";
 import type {
@@ -39,6 +44,7 @@ type SessionResponse = {
 };
 
 type WordbookReviewScope = "all" | "lesson" | null;
+type MainTab = "flashcards" | "sentences";
 
 function shuffleEntries(entries: VocabularyEntry[]) {
   const next = [...entries];
@@ -59,9 +65,13 @@ function getErrorMessage(error: unknown) {
 }
 
 export function StudyApp() {
+  const [mainTab, setMainTab] = useState<MainTab>("flashcards");
   const [mode, setMode] = useState<StudyMode>("all");
   const [direction, setDirection] = useState<StudyDirection>("cn-to-ko");
   const [selectedLesson, setSelectedLesson] = useState(lessons[0] ?? "2과");
+  const [selectedSentenceLesson, setSelectedSentenceLesson] = useState(
+    keySentenceLessons[0] ?? "2과",
+  );
   const [selectedWordbookLesson, setSelectedWordbookLesson] = useState(lessons[0] ?? "2과");
   const [wordbookReviewScope, setWordbookReviewScope] =
     useState<WordbookReviewScope>(null);
@@ -121,6 +131,10 @@ export function StudyApp() {
   );
   const progressPercent = sessionTotal ? (visibleAnswered / sessionTotal) * 100 : 0;
   const sessionFinished = sessionTotal > 0 && queue.length === 0;
+  const selectedSentences = useMemo(
+    () => getKeySentencesByLesson(selectedSentenceLesson),
+    [selectedSentenceLesson],
+  );
 
   useEffect(() => {
     async function loadSession() {
@@ -375,6 +389,55 @@ export function StudyApp() {
     );
   }
 
+  function renderKeySentences() {
+    return (
+      <section className="sentences-shell" aria-label="重点例句">
+        <div className="sentences-panel">
+          <div className="sentences-header">
+            <div>
+              <p className="eyebrow">Sentences</p>
+              <h2>重点例句</h2>
+              <p>
+                来自教材 2-7 课重点句子笔记 · 共 {keySentences.length} 句
+              </p>
+            </div>
+            <div className="sentences-count">
+              <strong>{selectedSentences.length}</strong>
+              <span>{selectedSentenceLesson}</span>
+            </div>
+          </div>
+
+          <div className="sentence-lesson-tabs" aria-label="选择课程">
+            {keySentenceLessons.map((lesson) => (
+              <button
+                className={selectedSentenceLesson === lesson ? "selected" : ""}
+                key={lesson}
+                onClick={() => setSelectedSentenceLesson(lesson)}
+                type="button"
+              >
+                {lesson}
+                <span>{getKeySentencesByLesson(lesson).length}</span>
+              </button>
+            ))}
+          </div>
+
+          <div className="sentence-list">
+            {selectedSentences.map((sentence, index) => (
+              <article className="sentence-row" key={sentence.id}>
+                <div className="sentence-index">{String(index + 1).padStart(2, "0")}</div>
+                <div>
+                  <span>{sentence.section}</span>
+                  <strong>{sentence.korean}</strong>
+                  {sentence.chinese ? <p>{sentence.chinese}</p> : null}
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+    );
+  }
+
   return (
     <>
       <WordWaterfall vocabulary={vocabulary} rippleSignal={rippleSignal} />
@@ -403,6 +466,26 @@ export function StudyApp() {
         </div>
       </header>
 
+      <nav className="main-tabs" aria-label="主要功能">
+        <button
+          className={mainTab === "flashcards" ? "selected" : ""}
+          onClick={() => setMainTab("flashcards")}
+          type="button"
+        >
+          <Shuffle size={17} />
+          闪卡
+        </button>
+        <button
+          className={mainTab === "sentences" ? "selected" : ""}
+          onClick={() => setMainTab("sentences")}
+          type="button"
+        >
+          <Layers3 size={17} />
+          重点例句
+        </button>
+      </nav>
+
+      {mainTab === "flashcards" ? (
       <section className={`workspace ${controlsCollapsed ? "controls-collapsed" : ""}`}>
         <aside className={`control-panel ${controlsCollapsed ? "collapsed" : ""}`}>
           <button
@@ -610,6 +693,9 @@ export function StudyApp() {
           </div>
         </section>
       </section>
+      ) : (
+        renderKeySentences()
+      )}
       </main>
     </>
   );
