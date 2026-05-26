@@ -9,7 +9,8 @@
     "build": "next build",
     "start": "next start",
     "test": "vitest run",
-    "import:vocab": "node scripts/import-vocabulary.mjs"
+    "import:vocab": "node scripts/import-vocabulary.mjs",
+    "update:vocab-lessons": "node scripts/update-vocabulary-lessons.mjs"
   },
   "dependencies": {
     "lucide-react": "latest",

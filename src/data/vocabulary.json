@@ -333,7 +333,7 @@
     "id": "031-2과-회계사-会计师",
     "word": "회계사",
     "hanja": "会计士",
-    "pronunciation": "",
+    "pronunciation": "[회계사/회게사]",
     "partOfSpeech": "名词",
     "meaning": "会计师",
     "lesson": "2과",
@@ -350,6 +350,17 @@
     "lesson": "2과",
     "source": "教材",
     "note": "=이쪽"
+  },
+  {
+    "id": "033-2과-이쪽-这边",
+    "word": "이쪽",
+    "hanja": "",
+    "pronunciation": "",
+    "partOfSpeech": "代词",
+    "meaning": "这边",
+    "lesson": "2과",
+    "source": "课堂补充",
+    "note": ""
   },
   {
     "id": "033-2과-씨-先生，小姐，夫人",
@@ -550,17 +561,6 @@
     "note": ""
   },
   {
-    "id": "051-2과-감사합니다.-谢谢！",
-    "word": "감사합니다.",
-    "hanja": "",
-    "pronunciation": "",
-    "partOfSpeech": "词性未标注",
-    "meaning": "谢谢！",
-    "lesson": "2과",
-    "source": "课堂补充",
-    "note": ""
-  },
-  {
     "id": "052-2과-나무-树",
     "word": "나무",
     "hanja": "",
@@ -635,6 +635,83 @@
     "meaning": "护士",
     "lesson": "2과",
     "source": "练习册",
+    "note": ""
+  },
+  {
+    "id": "059-2과-누가-谁（主语）",
+    "word": "누가",
+    "hanja": "",
+    "pronunciation": "",
+    "partOfSpeech": "代词",
+    "meaning": "谁（主语）",
+    "lesson": "2과",
+    "source": "课堂补充",
+    "note": ""
+  },
+  {
+    "id": "060-2과-맞아요.-对",
+    "word": "맞아요.",
+    "hanja": "",
+    "pronunciation": "",
+    "partOfSpeech": "词性未标注",
+    "meaning": "对",
+    "lesson": "2과",
+    "source": "课堂补充",
+    "note": ""
+  },
+  {
+    "id": "061-2과-틀려요.-错",
+    "word": "틀려요.",
+    "hanja": "",
+    "pronunciation": "",
+    "partOfSpeech": "词性未标注",
+    "meaning": "错",
+    "lesson": "2과",
+    "source": "课堂补充",
+    "note": ""
+  },
+  {
+    "id": "062-2과-남자-男的",
+    "word": "남자",
+    "hanja": "",
+    "pronunciation": "",
+    "partOfSpeech": "名词",
+    "meaning": "男的",
+    "lesson": "2과",
+    "source": "课堂补充",
+    "note": ""
+  },
+  {
+    "id": "063-2과-여자-女的",
+    "word": "여자",
+    "hanja": "",
+    "pronunciation": "",
+    "partOfSpeech": "名词",
+    "meaning": "女的",
+    "lesson": "2과",
+    "source": "课堂补充",
+    "note": ""
+  },
+  {
+    "id": "064-2과-수고했습니다.-辛苦了！",
+    "word": "수고했습니다.",
+    "hanja": "",
+    "pronunciation": "[수고핻씀니다]",
+    "partOfSpeech": "词性未标注",
+    "meaning": "辛苦了！",
+    "lesson": "2과",
+    "source": "课堂补充",
+    "note": ""
+  },
+  {
+    "id": "051-2과-감사합니다.-谢谢！",
+    "word": "감사합니다.",
+    "hanja": "",
+    "pronunciation": "[감사함니다]",
+    "partOfSpeech": "词性未标注",
+    "meaning": "谢谢！",
+    "lesson": "2과",
+    "source": "课堂补充",
     "note": ""
   },
   {
@@ -1397,17 +1474,6 @@
     "note": ""
   },
   {
-    "id": "128-3과-인분-人份",
-    "word": "인분",
-    "hanja": "人分",
-    "pronunciation": "",
-    "partOfSpeech": "依存名词",
-    "meaning": "人份",
-    "lesson": "3과",
-    "source": "课堂补充",
-    "note": ""
-  },
-  {
     "id": "129-3과-주문서-订单",
     "word": "주문서",
     "hanja": "注文书",
@@ -1669,7 +1735,7 @@
     "meaning": "帽子",
     "lesson": "4과",
     "source": "教材",
-    "note": ""
+    "note": "모자를 쓰다 （戴帽子）"
   },
   {
     "id": "153-4과-카메라-相机",
@@ -1980,17 +2046,6 @@
     "note": ""
   },
   {
-    "id": "181-4과-내-我，我的",
-    "word": "내",
-    "hanja": "",
-    "pronunciation": "",
-    "partOfSpeech": "代词",
-    "meaning": "我，我的",
-    "lesson": "4과",
-    "source": "课堂补充",
-    "note": ""
-  },
-  {
     "id": "182-4과-그럼-那么",
     "word": "그럼",
     "hanja": "",
@@ -2252,7 +2307,7 @@
     "meaning": "鞋",
     "lesson": "4과",
     "source": "课堂补充",
-    "note": "=신"
+    "note": "=신;신발을 신다（穿鞋）"
   },
   {
     "id": "206-4과-과일-가게-水果店",
@@ -2305,28 +2360,6 @@
     "pronunciation": "",
     "partOfSpeech": "名词",
     "meaning": "大叔",
-    "lesson": "4과",
-    "source": "课堂补充",
-    "note": ""
-  },
-  {
-    "id": "211-4과--씩-各",
-    "word": "-씩",
-    "hanja": "",
-    "pronunciation": "",
-    "partOfSpeech": "词缀",
-    "meaning": "各",
-    "lesson": "4과",
-    "source": "课堂补充",
-    "note": "하나씩, 둘씩, 두 개씩"
-  },
-  {
-    "id": "212-4과-귤-橘子",
-    "word": "귤",
-    "hanja": "",
-    "pronunciation": "",
-    "partOfSpeech": "名词",
-    "meaning": "橘子",
     "lesson": "4과",
     "source": "课堂补充",
     "note": ""
@@ -2506,6 +2539,17 @@
     "lesson": "5과",
     "source": "教材",
     "note": ""
+  },
+  {
+    "id": "232-5과-도서관-图书馆",
+    "word": "도서관",
+    "hanja": "图书馆",
+    "pronunciation": "",
+    "partOfSpeech": "名词",
+    "meaning": "图书馆",
+    "lesson": "5과",
+    "source": "课堂补充",
+    "note": "练习册出现"
   },
   {
     "id": "229-5과-지금-现在",
@@ -2871,6 +2915,17 @@
     "note": ""
   },
   {
+    "id": "266-5과-영화관-电影院",
+    "word": "영화관",
+    "hanja": "映画馆",
+    "pronunciation": "",
+    "partOfSpeech": "名词",
+    "meaning": "电影院",
+    "lesson": "5과",
+    "source": "课堂补充",
+    "note": ""
+  },
+  {
     "id": "262-5과-태권도-跆拳道",
     "word": "태권도",
     "hanja": "跆拳道",
@@ -2912,7 +2967,7 @@
     "meaning": "好吃、好喝",
     "lesson": "5과",
     "source": "教材",
-    "note": "맛이 있다"
+    "note": "原句：맛이 있다"
   },
   {
     "id": "266-5과-맛없다-不好吃",
@@ -2923,7 +2978,7 @@
     "meaning": "不好吃",
     "lesson": "5과",
     "source": "课堂补充",
-    "note": "맛이 없다"
+    "note": "原句：맛이 없다"
   },
   {
     "id": "267-5과-따뜻하다-温暖、暖和",
@@ -2946,6 +3001,17 @@
     "lesson": "5과",
     "source": "教材",
     "note": "（反）비싸다"
+  },
+  {
+    "id": "274-5과-비싸다-贵",
+    "word": "비싸다",
+    "hanja": "",
+    "pronunciation": "",
+    "partOfSpeech": "形容词",
+    "meaning": "贵",
+    "lesson": "5과",
+    "source": "课堂补充",
+    "note": "（反）싸다"
   },
   {
     "id": "269-5과-좋다-好",
@@ -3000,7 +3066,7 @@
     "meaning": "有意思、有趣",
     "lesson": "5과",
     "source": "教材",
-    "note": "재미가 있다"
+    "note": "原句：재미가 있다"
   },
   {
     "id": "274-5과-재미없다-没意思",
@@ -3011,7 +3077,7 @@
     "meaning": "没意思",
     "lesson": "5과",
     "source": "课堂补充",
-    "note": "재미가 없다"
+    "note": "原句：재미가 없다"
   },
   {
     "id": "275-5과-어디-哪儿",
@@ -3182,7 +3248,7 @@
     "id": "290-5과-택시-出租车",
     "word": "택시",
     "hanja": "taxi",
-    "pronunciation": "",
+    "pronunciation": "[택씨]",
     "partOfSpeech": "词性未标注",
     "meaning": "出租车",
     "lesson": "5과",
@@ -3371,7 +3437,7 @@
     "hanja": "平日",
     "pronunciation": "",
     "partOfSpeech": "名词",
-    "meaning": "平日(周一-周五)，平时",
+    "meaning": "周中(周一-周五)",
     "lesson": "6과",
     "source": "课堂补充",
     "note": ""
@@ -3553,34 +3619,12 @@
     "note": ""
   },
   {
-    "id": "324-6과-무슨-什么",
-    "word": "무슨",
-    "hanja": "",
-    "pronunciation": "",
-    "partOfSpeech": "冠形词",
-    "meaning": "什么",
-    "lesson": "6과",
-    "source": "教材",
-    "note": ""
-  },
-  {
     "id": "325-6과-언제-什么时候",
     "word": "언제",
     "hanja": "",
     "pronunciation": "",
     "partOfSpeech": "副词/代词",
     "meaning": "什么时候",
-    "lesson": "6과",
-    "source": "教材",
-    "note": ""
-  },
-  {
-    "id": "326-6과-일어나다-起床",
-    "word": "일어나다",
-    "hanja": "",
-    "pronunciation": "",
-    "partOfSpeech": "动词",
-    "meaning": "起床",
     "lesson": "6과",
     "source": "教材",
     "note": ""
@@ -3597,28 +3641,6 @@
     "note": ""
   },
   {
-    "id": "328-6과-자다-睡觉",
-    "word": "자다",
-    "hanja": "",
-    "pronunciation": "",
-    "partOfSpeech": "动词",
-    "meaning": "睡觉",
-    "lesson": "6과",
-    "source": "教材",
-    "note": ""
-  },
-  {
-    "id": "329-6과-나-我",
-    "word": "나",
-    "hanja": "",
-    "pronunciation": "",
-    "partOfSpeech": "名词",
-    "meaning": "我",
-    "lesson": "6과",
-    "source": "教材",
-    "note": ""
-  },
-  {
     "id": "330-6과-백화점-百货商店、百货大楼",
     "word": "백화점",
     "hanja": "百货店",
@@ -3628,28 +3650,6 @@
     "lesson": "6과",
     "source": "教材",
     "note": ""
-  },
-  {
-    "id": "331-6과-비싸다-贵",
-    "word": "비싸다",
-    "hanja": "",
-    "pronunciation": "",
-    "partOfSpeech": "形容词",
-    "meaning": "贵",
-    "lesson": "6과",
-    "source": "教材",
-    "note": ""
-  },
-  {
-    "id": "332-6과-일하다-工作",
-    "word": "일하다",
-    "hanja": "",
-    "pronunciation": "",
-    "partOfSpeech": "动词",
-    "meaning": "工作",
-    "lesson": "6과",
-    "source": "教材",
-    "note": "일을 하다"
   },
   {
     "id": "333-6과-샤워하다-洗澡、洗浴",
@@ -3685,28 +3685,6 @@
     "note": ""
   },
   {
-    "id": "336-6과-오늘-今天",
-    "word": "오늘",
-    "hanja": "",
-    "pronunciation": "",
-    "partOfSpeech": "名词",
-    "meaning": "今天",
-    "lesson": "6과",
-    "source": "教材",
-    "note": ""
-  },
-  {
-    "id": "337-6과-내일-明天",
-    "word": "내일",
-    "hanja": "来日",
-    "pronunciation": "",
-    "partOfSpeech": "名词",
-    "meaning": "明天",
-    "lesson": "6과",
-    "source": "教材",
-    "note": ""
-  },
-  {
     "id": "338-6과-모레-后天",
     "word": "모레",
     "hanja": "",
@@ -3716,17 +3694,6 @@
     "lesson": "6과",
     "source": "教材",
     "note": ""
-  },
-  {
-    "id": "339-6과-숙제하다-写作业",
-    "word": "숙제하다",
-    "hanja": "宿題하다",
-    "pronunciation": "[숙쩨하다]",
-    "partOfSpeech": "动词",
-    "meaning": "写作业",
-    "lesson": "6과",
-    "source": "课堂补充",
-    "note": "숙제를 하다"
   },
   {
     "id": "340-6과-지하철-地铁",
@@ -3757,17 +3724,6 @@
     "pronunciation": "",
     "partOfSpeech": "副词",
     "meaning": "已经",
-    "lesson": "6과",
-    "source": "课堂补充",
-    "note": ""
-  },
-  {
-    "id": "343-6과-약속이-있다-有约",
-    "word": "약속이 있다",
-    "hanja": "",
-    "pronunciation": "",
-    "partOfSpeech": "词性未标注",
-    "meaning": "有约",
     "lesson": "6과",
     "source": "课堂补充",
     "note": ""
@@ -3924,7 +3880,7 @@
     "meaning": "累，费劲",
     "lesson": "6과",
     "source": "练习册",
-    "note": ""
+    "note": "힘이 들다"
   },
   {
     "id": "358-6과-요가-瑜伽",
@@ -3944,17 +3900,6 @@
     "pronunciation": "",
     "partOfSpeech": "名词",
     "meaning": "羊肉",
-    "lesson": "6과",
-    "source": "练习册",
-    "note": ""
-  },
-  {
-    "id": "360-6과-쇠고기-牛肉",
-    "word": "쇠고기",
-    "hanja": "",
-    "pronunciation": "",
-    "partOfSpeech": "名词",
-    "meaning": "牛肉",
     "lesson": "6과",
     "source": "练习册",
     "note": ""
@@ -4001,7 +3946,7 @@
     "meaning": "上下班",
     "lesson": "6과",
     "source": "课堂补充",
-    "note": ""
+    "note": "출퇴근 시간에는 길이 복잡해요."
   },
   {
     "id": "365-6과-시간-时间，小时",
@@ -4466,6 +4411,17 @@
     "note": "ㄷ不规则; 걷고, 걸어서"
   },
   {
+    "id": "402-7과-놀다-玩",
+    "word": "놀다",
+    "hanja": "",
+    "pronunciation": "",
+    "partOfSpeech": "动词",
+    "meaning": "玩",
+    "lesson": "7과",
+    "source": "课堂补充",
+    "note": "ㄹ不规则"
+  },
+  {
     "id": "407-7과-시간이-있다-有时间",
     "word": "시간이 있다",
     "hanja": "时间이 있다",
@@ -4521,6 +4477,39 @@
     "note": ""
   },
   {
+    "id": "408-7과-지난주-上周",
+    "word": "지난주",
+    "hanja": "",
+    "pronunciation": "",
+    "partOfSpeech": "词性未标注",
+    "meaning": "上周",
+    "lesson": "7과",
+    "source": "课堂补充",
+    "note": "지난주 토요일 = 지난 토요일"
+  },
+  {
+    "id": "409-7과-이번-주-这周",
+    "word": "이번 주",
+    "hanja": "",
+    "pronunciation": "",
+    "partOfSpeech": "词性未标注",
+    "meaning": "这周",
+    "lesson": "7과",
+    "source": "课堂补充",
+    "note": "이번 주 토요일 = 이번 토요일"
+  },
+  {
+    "id": "410-7과-다음-주-下周",
+    "word": "다음 주",
+    "hanja": "",
+    "pronunciation": "",
+    "partOfSpeech": "词性未标注",
+    "meaning": "下周",
+    "lesson": "7과",
+    "source": "课堂补充",
+    "note": "다음 주 토요일 = 다음 토요일"
+  },
+  {
     "id": "412-7과-이사-搬家",
     "word": "이사",
     "hanja": "移徙",
@@ -4541,6 +4530,17 @@
     "lesson": "7과",
     "source": "练习册",
     "note": ""
+  },
+  {
+    "id": "413-7과-바쁘다-忙",
+    "word": "바쁘다",
+    "hanja": "",
+    "pronunciation": "",
+    "partOfSpeech": "形容词",
+    "meaning": "忙",
+    "lesson": "7과",
+    "source": "课堂补充",
+    "note": "으不规则，바빠요"
   },
   {
     "id": "414-7과-음료수-饮料",
@@ -4661,7 +4661,7 @@
     "meaning": "面包店",
     "lesson": "7과",
     "source": "练习册",
-    "note": ""
+    "note": "중국집, 한식당, 일식점"
   },
   {
     "id": "425-7과-선물-礼物",
@@ -4708,8 +4708,8 @@
     "note": ""
   },
   {
-    "id": "429-7과-꽃가게-花店",
-    "word": "꽃가게",
+    "id": "429-7과-꽃-가게-花店",
+    "word": "꽃 가게",
     "hanja": "",
     "pronunciation": "[꼳까게]",
     "partOfSpeech": "名词",
