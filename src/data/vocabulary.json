@@ -4763,17 +4763,6 @@
     "note": ""
   },
   {
-    "id": "434-8과-앞-前面",
-    "word": "앞",
-    "hanja": "",
-    "pronunciation": "",
-    "partOfSpeech": "名词",
-    "meaning": "前面",
-    "lesson": "8과",
-    "source": "教材",
-    "note": ""
-  },
-  {
     "id": "435-8과-뒤-后面",
     "word": "뒤",
     "hanja": "",
@@ -4826,6 +4815,50 @@
     "meaning": "左边",
     "lesson": "8과",
     "source": "教材",
+    "note": ""
+  },
+  {
+    "id": "439-8과-동쪽-东边",
+    "word": "동쪽",
+    "hanja": "東쪽",
+    "pronunciation": "",
+    "partOfSpeech": "名词",
+    "meaning": "东边",
+    "lesson": "8과",
+    "source": "课堂补充",
+    "note": ""
+  },
+  {
+    "id": "440-8과-서쪽-西边",
+    "word": "서쪽",
+    "hanja": "西쪽",
+    "pronunciation": "",
+    "partOfSpeech": "名词",
+    "meaning": "西边",
+    "lesson": "8과",
+    "source": "课堂补充",
+    "note": ""
+  },
+  {
+    "id": "441-8과-남쪽-南边",
+    "word": "남쪽",
+    "hanja": "南쪽",
+    "pronunciation": "",
+    "partOfSpeech": "名词",
+    "meaning": "南边",
+    "lesson": "8과",
+    "source": "课堂补充",
+    "note": ""
+  },
+  {
+    "id": "442-8과-북쪽-北边",
+    "word": "북쪽",
+    "hanja": "北쪽",
+    "pronunciation": "",
+    "partOfSpeech": "名词",
+    "meaning": "北边",
+    "lesson": "8과",
+    "source": "课堂补充",
     "note": ""
   },
   {
@@ -4895,17 +4928,6 @@
     "note": ""
   },
   {
-    "id": "446-8과-우체국-邮局",
-    "word": "우체국",
-    "hanja": "邮递局",
-    "pronunciation": "",
-    "partOfSpeech": "名词",
-    "meaning": "邮局",
-    "lesson": "8과",
-    "source": "教材",
-    "note": ""
-  },
-  {
     "id": "447-8과-약국-药店",
     "word": "약국",
     "hanja": "药局",
@@ -4945,17 +4967,6 @@
     "pronunciation": "",
     "partOfSpeech": "名词",
     "meaning": "宾馆",
-    "lesson": "8과",
-    "source": "教材",
-    "note": ""
-  },
-  {
-    "id": "451-8과-컴퓨터-电脑",
-    "word": "컴퓨터",
-    "hanja": "computer",
-    "pronunciation": "",
-    "partOfSpeech": "名词",
-    "meaning": "电脑",
     "lesson": "8과",
     "source": "教材",
     "note": ""
@@ -5044,28 +5055,6 @@
     "pronunciation": "",
     "partOfSpeech": "名词",
     "meaning": "公交车、巴士",
-    "lesson": "8과",
-    "source": "教材",
-    "note": ""
-  },
-  {
-    "id": "460-8과-시간-时间、小时",
-    "word": "시간",
-    "hanja": "时间",
-    "pronunciation": "",
-    "partOfSpeech": "名词",
-    "meaning": "时间、小时",
-    "lesson": "8과",
-    "source": "教材",
-    "note": ""
-  },
-  {
-    "id": "461-8과-생선-鱼",
-    "word": "생선",
-    "hanja": "生鲜",
-    "pronunciation": "",
-    "partOfSpeech": "名词",
-    "meaning": "鱼",
     "lesson": "8과",
     "source": "教材",
     "note": ""
@@ -5258,6 +5247,28 @@
     "note": ""
   },
   {
+    "id": "478-8과-기숙사-宿舍",
+    "word": "기숙사",
+    "hanja": "寄宿舍",
+    "pronunciation": "[기숙싸]",
+    "partOfSpeech": "名词",
+    "meaning": "宿舍",
+    "lesson": "8과",
+    "source": "课堂补充",
+    "note": ""
+  },
+  {
+    "id": "479-8과-건물-建筑，建筑物",
+    "word": "건물",
+    "hanja": "建物",
+    "pronunciation": "",
+    "partOfSpeech": "名词",
+    "meaning": "建筑，建筑物",
+    "lesson": "8과",
+    "source": "课堂补充",
+    "note": ""
+  },
+  {
     "id": "479-8과-고양이-猫",
     "word": "고양이",
     "hanja": "",
@@ -5343,7 +5354,7 @@
     "meaning": "接、接受",
     "lesson": "9과",
     "source": "教材",
-    "note": ""
+    "note": "（反）보내다:편지를 보내다"
   },
   {
     "id": "487-9과-전화하다-打电话",
@@ -5673,7 +5684,7 @@
     "meaning": "信",
     "lesson": "9과",
     "source": "练习册",
-    "note": "편지를 쓰다, 편지를 받다"
+    "note": "편지를 쓰다, 편지를 받다, 편지를 보내다"
   },
   {
     "id": "517-9과-들어가다-进去",

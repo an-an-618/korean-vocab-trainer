@@ -3,7 +3,7 @@ import { lessons, vocabulary } from "@/lib/vocabulary";
 
 describe("vocabulary data", () => {
   it("imports all Sheet1 entries", () => {
-    expect(vocabulary).toHaveLength(520);
+    expect(vocabulary).toHaveLength(521);
   });
 
   it("contains the required public fields", () => {
