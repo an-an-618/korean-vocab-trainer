@@ -1,0 +1,55 @@
+export type OralListeningCard = {
+  id: string;
+  sampleQuestionNumber: number;
+  question: string;
+  answer: string;
+  audioSrc: string;
+};
+
+export const oralListeningCards: OralListeningCard[] = [
+  { id: "listen-01", sampleQuestionNumber: 1, question: "어느 나라 사람이에요?", answer: "저는 중국 사람이에요.", audioSrc: "/audio/oral-listening/listening-01.wav" },
+  { id: "listen-02", sampleQuestionNumber: 2, question: "국적이 뭐예요?", answer: "중국이에요.", audioSrc: "/audio/oral-listening/listening-02.wav" },
+  { id: "listen-03", sampleQuestionNumber: 3, question: "직업이 뭐예요?", answer: "저는 요리사예요.", audioSrc: "/audio/oral-listening/listening-03.wav" },
+  { id: "listen-04", sampleQuestionNumber: 4, question: "무슨 일 하세요?", answer: "저는 요리사예요.", audioSrc: "/audio/oral-listening/listening-04.wav" },
+  { id: "listen-05", sampleQuestionNumber: 5, question: "오늘 수업이 있어요?", answer: "네, 있어요.", audioSrc: "/audio/oral-listening/listening-05.wav" },
+  { id: "listen-06", sampleQuestionNumber: 6, question: "요즘 수업이 많아요?", answer: "네, 많아요.", audioSrc: "/audio/oral-listening/listening-06.wav" },
+  { id: "listen-07", sampleQuestionNumber: 7, question: "모두 몇 개 있어요?", answer: "모두 세 개 있어요.", audioSrc: "/audio/oral-listening/listening-07.wav" },
+  { id: "listen-08", sampleQuestionNumber: 8, question: "주말에 보통 뭐 해요?", answer: "저는 보통 주말에 친구하고 영화를 봐요.", audioSrc: "/audio/oral-listening/listening-08.wav" },
+  { id: "listen-09", sampleQuestionNumber: 9, question: "영화를 자주 봐요?", answer: "아니요, 가끔 봐요.", audioSrc: "/audio/oral-listening/listening-09.wav" },
+  { id: "listen-10", sampleQuestionNumber: 10, question: "무슨 음식을 좋아해요?", answer: "저는 비빔밥을 좋아해요.", audioSrc: "/audio/oral-listening/listening-10.wav" },
+  { id: "listen-11", sampleQuestionNumber: 10, question: "무슨 과일을 좋아해요?", answer: "저는 사과를 좋아해요.", audioSrc: "/audio/oral-listening/listening-11.wav" },
+  { id: "listen-12", sampleQuestionNumber: 10, question: "무슨 음료수를 좋아해요?", answer: "저는 사이다를 좋아해요.", audioSrc: "/audio/oral-listening/listening-12.wav" },
+  { id: "listen-13", sampleQuestionNumber: 11, question: "커피를 마셔요?", answer: "네, 저는 커피를 마셔요. / 아니요, 저는 커피를 안 마셔요.", audioSrc: "/audio/oral-listening/listening-13.wav" },
+  { id: "listen-14", sampleQuestionNumber: 12, question: "생일이 언제예요?", answer: "제 생일은 사월 이십칠 일이에요.", audioSrc: "/audio/oral-listening/listening-14.wav" },
+  { id: "listen-15", sampleQuestionNumber: 12, question: "생일은 몇 월 며칠이에요?", answer: "제 생일은 사월 이십칠 일이에요.", audioSrc: "/audio/oral-listening/listening-15.wav" },
+  { id: "listen-16", sampleQuestionNumber: 13, question: "오늘은 무슨 요일이에요?", answer: "수요일이에요.", audioSrc: "/audio/oral-listening/listening-16.wav" },
+  { id: "listen-17", sampleQuestionNumber: 14, question: "내일은 몇 월 며칠이에요?", answer: "내일은 12월 23일이에요.", audioSrc: "/audio/oral-listening/listening-17.wav" },
+  { id: "listen-18", sampleQuestionNumber: 15, question: "언제 한국어 수업을 해요?", answer: "매주 월요일하고 수요일 여덟 시부터 아홉 시 삼십오 분까지 해요.", audioSrc: "/audio/oral-listening/listening-18.wav" },
+  { id: "listen-19", sampleQuestionNumber: 16, question: "무슨 요일에 한국어 수업을 해요?", answer: "월요일하고 수요일에 해요.", audioSrc: "/audio/oral-listening/listening-19.wav" },
+  { id: "listen-20", sampleQuestionNumber: 17, question: "몇 시부터 몇 시까지 한국어 수업을 해요?", answer: "오전 아홉 시 오십 분부터 열한 시 이십오 분까지 한국어 수업을 해요.", audioSrc: "/audio/oral-listening/listening-20.wav" },
+  { id: "listen-21", sampleQuestionNumber: 18, question: "지금 몇 시예요?", answer: "지금 아홉 시 이십 분이에요.", audioSrc: "/audio/oral-listening/listening-21.wav" },
+  { id: "listen-22", sampleQuestionNumber: 19, question: "보통 몇 시에 일어나요?", answer: "저는 보통 아침 일곱 시에 일어나요.", audioSrc: "/audio/oral-listening/listening-22.wav" },
+  { id: "listen-23", sampleQuestionNumber: 20, question: "오늘 몇 시에 일어났어요?", answer: "오늘은 오전 여덟 시에 일어났어요.", audioSrc: "/audio/oral-listening/listening-23.wav" },
+  { id: "listen-24", sampleQuestionNumber: 21, question: "보통 몇 시에 자요?", answer: "저는 보통 밤 열한 시에 자요.", audioSrc: "/audio/oral-listening/listening-24.wav" },
+  { id: "listen-25", sampleQuestionNumber: 22, question: "어제 몇 시에 잤어요?", answer: "어제는 새벽 한 시에 잤어요.", audioSrc: "/audio/oral-listening/listening-25.wav" },
+  { id: "listen-26", sampleQuestionNumber: 23, question: "오늘 뭐 해요?", answer: "백화점에 가요. 그리고 옷을 사요.", audioSrc: "/audio/oral-listening/listening-26.wav" },
+  { id: "listen-27", sampleQuestionNumber: 23, question: "내일 뭐 해요?", answer: "백화점에 가요. 그리고 옷을 사요.", audioSrc: "/audio/oral-listening/listening-27.wav" },
+  { id: "listen-28", sampleQuestionNumber: 23, question: "모레 뭐 해요?", answer: "백화점에 가요. 그리고 옷을 사요.", audioSrc: "/audio/oral-listening/listening-28.wav" },
+  { id: "listen-29", sampleQuestionNumber: 24, question: "{어제/그제} 뭐 했어요?", answer: "저는 {어제/그제} 도서관에서 한국어를 공부했어요.", audioSrc: "/audio/oral-listening/listening-29.wav" },
+  { id: "listen-30", sampleQuestionNumber: 25, question: "평소에 운동해요?", answer: "네, 운동을 자주 해요.", audioSrc: "/audio/oral-listening/listening-30.wav" },
+  { id: "listen-31", sampleQuestionNumber: 26, question: "무슨 운동을 해요?", answer: "수영해요. / 태권도를 해요. / 요가를 해요.", audioSrc: "/audio/oral-listening/listening-31.wav" },
+  { id: "listen-32", sampleQuestionNumber: 27, question: "보통 언제 운동을 해요?", answer: "저는 보통 토요일 오후에 운동해요.", audioSrc: "/audio/oral-listening/listening-32.wav" },
+  { id: "listen-33", sampleQuestionNumber: 28, question: "주말에 어디에 갔어요?", answer: "주말에 공원에 갔어요.", audioSrc: "/audio/oral-listening/listening-33.wav" },
+  { id: "listen-34", sampleQuestionNumber: 29, question: "거기에 자주 가요?", answer: "네, 자주 가요. / 아니요, 별로 안 가요.", audioSrc: "/audio/oral-listening/listening-34.wav" },
+  { id: "listen-35", sampleQuestionNumber: 30, question: "요즘 날씨가 어때요?", answer: "요즘 날씨가 따뜻해요.", audioSrc: "/audio/oral-listening/listening-35.wav" },
+  { id: "listen-36", sampleQuestionNumber: 31, question: "어제 도서관에 갔지요?", answer: "네, 갔어요.", audioSrc: "/audio/oral-listening/listening-36.wav" },
+  { id: "listen-37", sampleQuestionNumber: 32, question: "도서관에 자주 가요? 거기까지 걸어서 얼마나 걸려요?", answer: "네, 자주 가요. 십오 분 걸려요.", audioSrc: "/audio/oral-listening/listening-37.wav" },
+  { id: "listen-38", sampleQuestionNumber: 33, question: "학교 안에 커피숍이 있어요?", answer: "네, 있어요.", audioSrc: "/audio/oral-listening/listening-38.wav" },
+  { id: "listen-39", sampleQuestionNumber: 34, question: "여기에서 커피숍까지 얼마나 걸려요?", answer: "걸어서 십 분 걸려요.", audioSrc: "/audio/oral-listening/listening-39.wav" },
+  { id: "listen-40", sampleQuestionNumber: 35, question: "기숙사에 세탁소가 있어요?", answer: "아니요, 없어요.", audioSrc: "/audio/oral-listening/listening-40.wav" },
+  { id: "listen-41", sampleQuestionNumber: 36, question: "그럼 학교에 세탁소가 있어요? 거기까지 얼마나 걸려요?", answer: "네, 있어요. 식당 앞에 세탁소가 있어요. 여기에서 세탁소까지 자전거를 타고 십오 분 걸려요.", audioSrc: "/audio/oral-listening/listening-41.wav" },
+  { id: "listen-42", sampleQuestionNumber: 37, question: "기숙사 근처에 뭐가 있어요?", answer: "기숙사 근처에 운동장하고 미용실이 있어요.", audioSrc: "/audio/oral-listening/listening-42.wav" },
+  { id: "listen-43", sampleQuestionNumber: 38, question: "방에 냉장고가 없죠?", answer: "네, 없어요. / 아니요, 있어요.", audioSrc: "/audio/oral-listening/listening-43.wav" },
+  { id: "listen-44", sampleQuestionNumber: 39, question: "방에 소파가 있어요?", answer: "아니요, 없어요.", audioSrc: "/audio/oral-listening/listening-44.wav" },
+  { id: "listen-45", sampleQuestionNumber: 40, question: "집에서 학교까지 얼마나 걸려요?", answer: "지하철을 타고 한 시간 걸려요.", audioSrc: "/audio/oral-listening/listening-45.wav" },
+];

@@ -7,6 +7,7 @@ import {
   Cloud,
   Globe2,
   GraduationCap,
+  Headphones,
   Layers3,
   LogIn,
   LogOut,
@@ -15,6 +16,7 @@ import {
   PanelLeftOpen,
   RefreshCcw,
   Shuffle,
+  Volume2,
   X,
 } from "lucide-react";
 import { FormEvent, useEffect, useMemo, useState } from "react";
@@ -24,6 +26,10 @@ import {
   keySentenceLessons,
   keySentences,
 } from "@/data/key-sentences";
+import {
+  oralListeningCards,
+  type OralListeningCard,
+} from "@/data/oral-listening";
 import {
   getOralExamQuestionsByLesson,
   oralExamLessons,
@@ -53,6 +59,7 @@ type SessionResponse = {
 
 type WordbookReviewScope = "all" | "lesson" | null;
 type MainTab = "flashcards" | "sentences" | "oral";
+type OralPracticeMode = "qa" | "listening";
 
 function shuffleEntries(entries: VocabularyEntry[]) {
   const next = [...entries];
@@ -64,6 +71,15 @@ function shuffleEntries(entries: VocabularyEntry[]) {
 }
 
 function shuffleOralQuestions(entries: OralExamQuestion[]) {
+  const next = [...entries];
+  for (let index = next.length - 1; index > 0; index -= 1) {
+    const swapIndex = Math.floor(Math.random() * (index + 1));
+    [next[index], next[swapIndex]] = [next[swapIndex], next[index]];
+  }
+  return next;
+}
+
+function shuffleListeningCards(entries: OralListeningCard[]) {
   const next = [...entries];
   for (let index = next.length - 1; index > 0; index -= 1) {
     const swapIndex = Math.floor(Math.random() * (index + 1));
@@ -89,6 +105,7 @@ export function StudyApp() {
   const [selectedSentenceLesson, setSelectedSentenceLesson] = useState(
     keySentenceLessons[0] ?? "2과",
   );
+  const [oralPracticeMode, setOralPracticeMode] = useState<OralPracticeMode>("qa");
   const [selectedOralLesson, setSelectedOralLesson] = useState<string>("all");
   const [selectedWordbookLesson, setSelectedWordbookLesson] = useState(lessons[0] ?? "2과");
   const [wordbookReviewScope, setWordbookReviewScope] =
@@ -107,6 +124,9 @@ export function StudyApp() {
   const [oralQueue, setOralQueue] = useState<OralExamQuestion[]>([]);
   const [oralAnsweredCount, setOralAnsweredCount] = useState(0);
   const [oralShowAnswer, setOralShowAnswer] = useState(false);
+  const [listeningQueue, setListeningQueue] = useState<OralListeningCard[]>([]);
+  const [listeningAnsweredCount, setListeningAnsweredCount] = useState(0);
+  const [listeningShowAnswer, setListeningShowAnswer] = useState(false);
   const [answeredCount, setAnsweredCount] = useState(0);
   const [sessionTotal, setSessionTotal] = useState(0);
   const [answer, setAnswer] = useState("");
@@ -194,6 +214,15 @@ export function StudyApp() {
     ? (visibleOralAnswered / oralPool.length) * 100
     : 0;
   const oralFinished = oralPool.length > 0 && oralQueue.length === 0;
+  const currentListening = listeningQueue[0] ?? null;
+  const visibleListeningAnswered = Math.min(
+    oralListeningCards.length,
+    listeningAnsweredCount + (listeningShowAnswer && currentListening ? 1 : 0),
+  );
+  const listeningProgressPercent = oralListeningCards.length
+    ? (visibleListeningAnswered / oralListeningCards.length) * 100
+    : 0;
+  const listeningFinished = oralListeningCards.length > 0 && listeningQueue.length === 0;
 
   useEffect(() => {
     async function loadSession() {
@@ -258,6 +287,12 @@ export function StudyApp() {
     setOralAnsweredCount(0);
     setOralShowAnswer(false);
   }, [oralPool]);
+
+  useEffect(() => {
+    setListeningQueue(shuffleListeningCards(oralListeningCards));
+    setListeningAnsweredCount(0);
+    setListeningShowAnswer(false);
+  }, []);
 
   function selectMode(nextMode: StudyMode) {
     setMode(nextMode);
@@ -365,6 +400,23 @@ export function StudyApp() {
     setOralQueue(shuffleOralQuestions(oralPool));
     setOralAnsweredCount(0);
     setOralShowAnswer(false);
+  }
+
+  function revealListeningAnswer() {
+    setListeningShowAnswer(true);
+  }
+
+  function advanceListeningCard() {
+    if (!currentListening) return;
+    setListeningAnsweredCount((count) => Math.min(oralListeningCards.length, count + 1));
+    setListeningQueue((currentQueue) => currentQueue.slice(1));
+    setListeningShowAnswer(false);
+  }
+
+  function restartListeningSession() {
+    setListeningQueue(shuffleListeningCards(oralListeningCards));
+    setListeningAnsweredCount(0);
+    setListeningShowAnswer(false);
   }
 
   async function submitAnswer(event: FormEvent<HTMLFormElement>) {
@@ -676,6 +728,83 @@ export function StudyApp() {
     );
   }
 
+  function renderListeningPractice() {
+    return (
+      <>
+        <div className="progress-card oral-progress" aria-label="听音练习进度">
+          <div className="progress-copy">
+            <span>听音进度</span>
+            <strong>
+              {visibleListeningAnswered}/{oralListeningCards.length}
+            </strong>
+          </div>
+          <div className="progress-track">
+            <div
+              className="progress-fill"
+              style={{ width: `${listeningProgressPercent}%` }}
+            />
+          </div>
+        </div>
+
+        {currentListening ? (
+          <>
+            <article className="flashcard oral-card listening-card">
+              <audio
+                aria-label="听音练习音频"
+                className="listening-audio"
+                controls
+                preload="none"
+                src={currentListening.audioSrc}
+              >
+                当前浏览器不支持音频播放。
+              </audio>
+            </article>
+
+            {listeningShowAnswer ? (
+              <div className="listening-answer">
+                <span>样题第 {currentListening.sampleQuestionNumber} 题</span>
+                <strong>{currentListening.question}</strong>
+                <p>{currentListening.answer}</p>
+              </div>
+            ) : null}
+
+            <div className="action-row oral-actions">
+              <button
+                className="primary-button"
+                disabled={listeningShowAnswer}
+                onClick={revealListeningAnswer}
+                type="button"
+              >
+                查看答案
+              </button>
+              <button className="ghost-button" onClick={advanceListeningCard} type="button">
+                <ChevronRight size={16} />
+                下一段
+              </button>
+              <button className="ghost-button" onClick={restartListeningSession} type="button">
+                <RefreshCcw size={16} />
+                重新洗牌
+              </button>
+            </div>
+          </>
+        ) : (
+          <div className="empty-state oral-empty">
+            <Headphones size={34} />
+            <h2>{listeningFinished ? "本轮听音练习完成" : "当前没有听音卡片"}</h2>
+            <p>
+              {listeningFinished
+                ? "这一轮的音频片段都已经抽完，不会自动重复。"
+                : "请重新开始本轮听音练习。"}
+            </p>
+            <button className="primary-button" onClick={restartListeningSession} type="button">
+              重新开始本轮
+            </button>
+          </div>
+        )}
+      </>
+    );
+  }
+
   function renderOralExam() {
     return (
       <section className="sentences-shell oral-shell" aria-label="口语考试模拟器">
@@ -684,14 +813,47 @@ export function StudyApp() {
             <div>
               <p className="eyebrow">Oral Exam</p>
               <h2>口语考试模拟器</h2>
-              <p>60 组去重问答 · 随机抽题 · 正面问题 / 反面答案</p>
+              <p>
+                {oralPracticeMode === "qa"
+                  ? "60 组去重问答 · 随机抽题 · 正面问题 / 反面答案"
+                  : "45 段老师问句录音 · 正面只听音频 · 背面核对样题答案"}
+              </p>
             </div>
             <div className="sentences-count">
-              <strong>{oralPool.length}</strong>
-              <span>{selectedOralLesson === "all" ? "全部" : selectedOralLesson}</span>
+              <strong>
+                {oralPracticeMode === "qa" ? oralPool.length : oralListeningCards.length}
+              </strong>
+              <span>
+                {oralPracticeMode === "qa"
+                  ? selectedOralLesson === "all"
+                    ? "全部"
+                    : selectedOralLesson
+                  : "听音"}
+              </span>
             </div>
           </div>
 
+          <div className="oral-mode-tabs" aria-label="选择口语练习子功能">
+            <button
+              className={oralPracticeMode === "qa" ? "selected" : ""}
+              onClick={() => setOralPracticeMode("qa")}
+              type="button"
+            >
+              <Mic2 size={17} />
+              问答抽题
+            </button>
+            <button
+              className={oralPracticeMode === "listening" ? "selected" : ""}
+              onClick={() => setOralPracticeMode("listening")}
+              type="button"
+            >
+              <Volume2 size={17} />
+              听音练习
+            </button>
+          </div>
+
+          {oralPracticeMode === "qa" ? (
+            <>
           <div className="sentence-lesson-tabs oral-lesson-tabs" aria-label="选择口语题课程">
             <button
               className={selectedOralLesson === "all" ? "selected" : ""}
@@ -777,6 +939,10 @@ export function StudyApp() {
                 重新开始本轮
               </button>
             </div>
+          )}
+            </>
+          ) : (
+            renderListeningPractice()
           )}
         </div>
       </section>
