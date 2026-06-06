@@ -1204,34 +1204,6 @@ a {
   line-height: 1.18;
 }
 
-.oral-audio-player {
-  display: grid;
-  grid-template-columns: auto minmax(190px, 1fr);
-  gap: 12px;
-  align-items: center;
-  margin-top: 2px;
-  padding: 10px 12px;
-  border: 1px solid rgba(255, 255, 255, 0.58);
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.27);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.56);
-}
-
-.oral-audio-player > div {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  color: var(--accent-strong);
-  font-size: 13px;
-  font-weight: 800;
-  white-space: nowrap;
-}
-
-.oral-audio-player audio {
-  width: 100%;
-  height: 34px;
-}
-
 .oral-answer {
   display: grid;
   gap: 10px;
@@ -1488,11 +1460,6 @@ a {
 
   .oral-answer strong {
     font-size: 22px;
-  }
-
-  .oral-audio-player {
-    grid-template-columns: 1fr;
-    border-radius: 8px;
   }
 }
 
