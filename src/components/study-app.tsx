@@ -10,6 +10,7 @@ import {
   Layers3,
   LogIn,
   LogOut,
+  Mic2,
   PanelLeftClose,
   PanelLeftOpen,
   RefreshCcw,
@@ -23,6 +24,12 @@ import {
   keySentenceLessons,
   keySentences,
 } from "@/data/key-sentences";
+import {
+  getOralExamQuestionsByLesson,
+  oralExamLessons,
+  oralExamQuestions,
+  type OralExamQuestion,
+} from "@/data/oral-exam";
 import { gradeAnswer, getExpectedAnswer, getPrompt } from "@/lib/grading";
 import { lessons, vocabulary } from "@/lib/vocabulary";
 import type {
@@ -45,9 +52,18 @@ type SessionResponse = {
 };
 
 type WordbookReviewScope = "all" | "lesson" | null;
-type MainTab = "flashcards" | "sentences";
+type MainTab = "flashcards" | "sentences" | "oral";
 
 function shuffleEntries(entries: VocabularyEntry[]) {
+  const next = [...entries];
+  for (let index = next.length - 1; index > 0; index -= 1) {
+    const swapIndex = Math.floor(Math.random() * (index + 1));
+    [next[index], next[swapIndex]] = [next[swapIndex], next[index]];
+  }
+  return next;
+}
+
+function shuffleOralQuestions(entries: OralExamQuestion[]) {
   const next = [...entries];
   for (let index = next.length - 1; index > 0; index -= 1) {
     const swapIndex = Math.floor(Math.random() * (index + 1));
@@ -73,6 +89,7 @@ export function StudyApp() {
   const [selectedSentenceLesson, setSelectedSentenceLesson] = useState(
     keySentenceLessons[0] ?? "2과",
   );
+  const [selectedOralLesson, setSelectedOralLesson] = useState<string>("all");
   const [selectedWordbookLesson, setSelectedWordbookLesson] = useState(lessons[0] ?? "2과");
   const [wordbookReviewScope, setWordbookReviewScope] =
     useState<WordbookReviewScope>(null);
@@ -87,6 +104,9 @@ export function StudyApp() {
   });
   const [customSentenceMessage, setCustomSentenceMessage] = useState("");
   const [queue, setQueue] = useState<VocabularyEntry[]>([]);
+  const [oralQueue, setOralQueue] = useState<OralExamQuestion[]>([]);
+  const [oralAnsweredCount, setOralAnsweredCount] = useState(0);
+  const [oralShowAnswer, setOralShowAnswer] = useState(false);
   const [answeredCount, setAnsweredCount] = useState(0);
   const [sessionTotal, setSessionTotal] = useState(0);
   const [answer, setAnswer] = useState("");
@@ -155,6 +175,25 @@ export function StudyApp() {
       ]),
     );
   }, [customSentences]);
+  const oralPool = useMemo(() => {
+    return selectedOralLesson === "all"
+      ? oralExamQuestions
+      : getOralExamQuestionsByLesson(selectedOralLesson);
+  }, [selectedOralLesson]);
+  const oralLessonCounts = useMemo(() => {
+    return new Map(
+      oralExamLessons.map((lesson) => [lesson, getOralExamQuestionsByLesson(lesson).length]),
+    );
+  }, []);
+  const currentOral = oralQueue[0] ?? null;
+  const visibleOralAnswered = Math.min(
+    oralPool.length,
+    oralAnsweredCount + (oralShowAnswer && currentOral ? 1 : 0),
+  );
+  const oralProgressPercent = oralPool.length
+    ? (visibleOralAnswered / oralPool.length) * 100
+    : 0;
+  const oralFinished = oralPool.length > 0 && oralQueue.length === 0;
 
   useEffect(() => {
     async function loadSession() {
@@ -213,6 +252,12 @@ export function StudyApp() {
     setAnswer("");
     setFeedback(null);
   }, [activePool]);
+
+  useEffect(() => {
+    setOralQueue(shuffleOralQuestions(oralPool));
+    setOralAnsweredCount(0);
+    setOralShowAnswer(false);
+  }, [oralPool]);
 
   function selectMode(nextMode: StudyMode) {
     setMode(nextMode);
@@ -303,6 +348,23 @@ export function StudyApp() {
     setAnsweredCount(0);
     setAnswer("");
     setFeedback(null);
+  }
+
+  function revealOralAnswer() {
+    setOralShowAnswer(true);
+  }
+
+  function advanceOralQuestion() {
+    if (!currentOral) return;
+    setOralAnsweredCount((count) => Math.min(oralPool.length, count + 1));
+    setOralQueue((currentQueue) => currentQueue.slice(1));
+    setOralShowAnswer(false);
+  }
+
+  function restartOralSession() {
+    setOralQueue(shuffleOralQuestions(oralPool));
+    setOralAnsweredCount(0);
+    setOralShowAnswer(false);
   }
 
   async function submitAnswer(event: FormEvent<HTMLFormElement>) {
@@ -614,6 +676,113 @@ export function StudyApp() {
     );
   }
 
+  function renderOralExam() {
+    return (
+      <section className="sentences-shell oral-shell" aria-label="口语考试模拟器">
+        <div className="sentences-panel oral-panel">
+          <div className="sentences-header oral-header">
+            <div>
+              <p className="eyebrow">Oral Exam</p>
+              <h2>口语考试模拟器</h2>
+              <p>60 组去重问答 · 随机抽题 · 正面问题 / 反面答案</p>
+            </div>
+            <div className="sentences-count">
+              <strong>{oralPool.length}</strong>
+              <span>{selectedOralLesson === "all" ? "全部" : selectedOralLesson}</span>
+            </div>
+          </div>
+
+          <div className="sentence-lesson-tabs oral-lesson-tabs" aria-label="选择口语题课程">
+            <button
+              className={selectedOralLesson === "all" ? "selected" : ""}
+              onClick={() => setSelectedOralLesson("all")}
+              type="button"
+            >
+              全部
+              <span>{oralExamQuestions.length}</span>
+            </button>
+            {oralExamLessons.map((lesson) => (
+              <button
+                className={selectedOralLesson === lesson ? "selected" : ""}
+                key={lesson}
+                onClick={() => setSelectedOralLesson(lesson)}
+                type="button"
+              >
+                {lesson}
+                <span>{oralLessonCounts.get(lesson) ?? 0}</span>
+              </button>
+            ))}
+          </div>
+
+          <div className="progress-card oral-progress" aria-label="口语抽题进度">
+            <div className="progress-copy">
+              <span>本轮进度</span>
+              <strong>
+                {visibleOralAnswered}/{oralPool.length}
+              </strong>
+            </div>
+            <div className="progress-track">
+              <div className="progress-fill" style={{ width: `${oralProgressPercent}%` }} />
+            </div>
+          </div>
+
+          {currentOral ? (
+            <>
+              <article className="flashcard oral-card">
+                <div className="oral-card-meta">
+                  <span>{currentOral.lesson}</span>
+                  <span>{currentOral.focus}</span>
+                </div>
+                <p className="prompt-label">问题</p>
+                <div className="prompt korean oral-question">{currentOral.question}</div>
+                <div className={`oral-answer ${oralShowAnswer ? "visible" : ""}`}>
+                  <span>参考回答</span>
+                  {oralShowAnswer ? (
+                    <strong>{currentOral.answer}</strong>
+                  ) : (
+                    <p>先自己开口说一遍，再翻到背面核对。</p>
+                  )}
+                </div>
+              </article>
+
+              <div className="action-row oral-actions">
+                <button
+                  className="primary-button"
+                  disabled={oralShowAnswer}
+                  onClick={revealOralAnswer}
+                  type="button"
+                >
+                  查看答案
+                </button>
+                <button className="ghost-button" onClick={advanceOralQuestion} type="button">
+                  <ChevronRight size={16} />
+                  下一题
+                </button>
+                <button className="ghost-button" onClick={restartOralSession} type="button">
+                  <RefreshCcw size={16} />
+                  重新洗牌
+                </button>
+              </div>
+            </>
+          ) : (
+            <div className="empty-state oral-empty">
+              <Mic2 size={34} />
+              <h2>{oralFinished ? "本轮口语题已完成" : "当前没有口语题"}</h2>
+              <p>
+                {oralFinished
+                  ? "这一轮的题目都已经抽完，不会自动重复。"
+                  : "请切换到全部或其他课程。"}
+              </p>
+              <button className="primary-button" onClick={restartOralSession} type="button">
+                重新开始本轮
+              </button>
+            </div>
+          )}
+        </div>
+      </section>
+    );
+  }
+
   return (
     <>
       <WordWaterfall vocabulary={vocabulary} rippleSignal={rippleSignal} />
@@ -658,6 +827,14 @@ export function StudyApp() {
         >
           <Layers3 size={17} />
           重点例句
+        </button>
+        <button
+          className={mainTab === "oral" ? "selected" : ""}
+          onClick={() => setMainTab("oral")}
+          type="button"
+        >
+          <Mic2 size={17} />
+          口语考试模拟器
         </button>
       </nav>
 
@@ -869,8 +1046,10 @@ export function StudyApp() {
           </div>
         </section>
       </section>
-      ) : (
+      ) : mainTab === "sentences" ? (
         renderKeySentences()
+      ) : (
+        renderOralExam()
       )}
       </main>
     </>

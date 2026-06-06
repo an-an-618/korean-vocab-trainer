@@ -166,9 +166,9 @@ a {
 
 .main-tabs {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 8px;
-  width: min(100%, 360px);
+  width: min(100%, 560px);
   margin: 0 auto 20px;
   padding: 6px;
   border: 1px solid rgba(255, 255, 255, 0.68);
@@ -1157,6 +1157,93 @@ a {
   line-height: 1.55;
 }
 
+.oral-shell {
+  max-width: 920px;
+}
+
+.oral-panel {
+  gap: 16px;
+}
+
+.oral-lesson-tabs {
+  grid-template-columns: repeat(9, minmax(0, 1fr));
+}
+
+.oral-progress {
+  margin-bottom: 0;
+}
+
+.oral-card {
+  min-height: 360px;
+  max-width: 740px;
+  gap: 14px;
+  padding: 32px 40px;
+}
+
+.oral-card-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+
+.oral-card-meta span,
+.oral-answer span {
+  display: inline-flex;
+  width: fit-content;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: rgba(238, 244, 241, 0.64);
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 780;
+}
+
+.oral-question {
+  font-size: 42px;
+  line-height: 1.18;
+}
+
+.oral-answer {
+  display: grid;
+  gap: 10px;
+  min-height: 94px;
+  margin-top: 10px;
+  padding: 16px 18px;
+  border: 1px solid rgba(255, 255, 255, 0.58);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.28);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.56);
+}
+
+.oral-answer.visible {
+  background:
+    linear-gradient(90deg, rgba(223, 242, 236, 0.34), transparent 58%),
+    rgba(255, 255, 255, 0.34);
+}
+
+.oral-answer strong {
+  color: var(--accent-strong);
+  font-size: 28px;
+  line-height: 1.28;
+  overflow-wrap: anywhere;
+}
+
+.oral-answer p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.oral-actions {
+  flex-wrap: wrap;
+}
+
+.oral-empty {
+  min-height: 360px;
+}
+
 .empty-state {
   display: grid;
   place-items: center;
@@ -1275,7 +1362,8 @@ a {
 
   .notebook-actions,
   .notebook-lesson-strip,
-  .sentence-lesson-tabs {
+  .sentence-lesson-tabs,
+  .oral-lesson-tabs {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
@@ -1347,6 +1435,31 @@ a {
 
   .sentence-row strong {
     font-size: 20px;
+  }
+
+  .main-tabs {
+    gap: 5px;
+    padding: 5px;
+  }
+
+  .main-tabs button {
+    gap: 5px;
+    min-height: 40px;
+    padding: 0 6px;
+    font-size: 12px;
+  }
+
+  .oral-card {
+    min-height: 340px;
+    padding: 24px;
+  }
+
+  .oral-question {
+    font-size: 32px;
+  }
+
+  .oral-answer strong {
+    font-size: 22px;
   }
 }
 
