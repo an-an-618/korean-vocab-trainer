@@ -15,6 +15,7 @@ import {
   PanelLeftOpen,
   RefreshCcw,
   Shuffle,
+  Volume2,
   X,
 } from "lucide-react";
 import { FormEvent, useEffect, useMemo, useState } from "react";
@@ -735,6 +736,17 @@ export function StudyApp() {
                 </div>
                 <p className="prompt-label">问题</p>
                 <div className="prompt korean oral-question">{currentOral.question}</div>
+                {currentOral.questionAudioSrc ? (
+                  <div className="oral-audio-player">
+                    <div>
+                      <Volume2 size={16} />
+                      <span>老师录音</span>
+                    </div>
+                    <audio controls preload="none" src={currentOral.questionAudioSrc}>
+                      当前浏览器不支持音频播放。
+                    </audio>
+                  </div>
+                ) : null}
                 <div className={`oral-answer ${oralShowAnswer ? "visible" : ""}`}>
                   <span>参考回答</span>
                   {oralShowAnswer ? (
