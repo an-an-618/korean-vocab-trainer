@@ -815,7 +815,7 @@ export function StudyApp() {
               <h2>口语考试模拟器</h2>
               <p>
                 {oralPracticeMode === "qa"
-                  ? "60 组去重问答 · 随机抽题 · 正面问题 / 反面答案"
+                  ? `${oralExamQuestions.length} 组扩充问答 · 随机抽题 · 正面问题 / 反面答案`
                   : "45 段老师问句录音 · 正面只听音频 · 背面核对样题答案"}
               </p>
             </div>

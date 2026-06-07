@@ -10,8 +10,11 @@ function normalize(text: string) {
 }
 
 describe("oral exam question data", () => {
-  it("contains the planned 60 question-answer cards", () => {
-    expect(oralExamQuestions).toHaveLength(60);
+  it("contains expanded question-answer cards for each lesson", () => {
+    expect(oralExamQuestions).toHaveLength(168);
+    for (const lesson of oralExamLessons) {
+      expect(getOralExamQuestionsByLesson(lesson).length).toBeGreaterThanOrEqual(21);
+    }
   });
 
   it("deduplicates question-answer pairs", () => {
@@ -48,7 +51,7 @@ describe("oral exam question data", () => {
   });
 
   it("can filter cards by lesson", () => {
-    expect(getOralExamQuestionsByLesson("8과")).toHaveLength(12);
+    expect(getOralExamQuestionsByLesson("8과")).toHaveLength(21);
     expect(getOralExamQuestionsByLesson("8과").every((question) => question.lesson === "8과")).toBe(
       true,
     );
